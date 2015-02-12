@@ -6,7 +6,7 @@ Python Selenium script that logs into your Yahoo fantasy basketball account and 
 
 For example to start active players for the next week including today you would use run the following from the command line.
 
-`python start-active-players.py username password 7`
+`python start-active-players.py 7 username password`
 
 
 **Why**
@@ -23,7 +23,7 @@ For example to start active players for the next week including today you would 
 **How**
 
 1. Download the script locally
-2. Run the script and pass your Yahoo usename, password and the number of days you want to automate as command line arguments.
+2. Run the script and pass the number of days you want to automate, your Yahoo usename, and account password as command line arguments.
 
 **To-Do**
 
