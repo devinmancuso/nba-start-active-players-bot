@@ -23,7 +23,7 @@ For example to start active players for the next week including today you would 
 **How**
 
 1. Download the script locally
-2. Run the script and pass the number of days you want to automate, your Yahoo usename, and account password as command line arguments.
+2. Run the script and pass the number of days you want to automate, your Yahoo username, and account password as command line arguments.
 
 **To-Do**
 
