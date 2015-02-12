@@ -19,7 +19,7 @@ driver = webdriver.Chrome(executable_path='/Library/Python/2.7/site-packages/sel
 driver.set_window_size(1920, 1080)
 driver.maximize_window()
 
-driver.get('https://login.yahoo.com/config/login?.src=spt&.intl=us&.done=http%3A%2F%2Fbasketball.fantasysports.yahoo.com%2Fnba%2F54455')
+driver.get('https://login.yahoo.com/config/login?.src=spt&.intl=us&.done=http%3A%2F%2Fbasketball.fantasysports.yahoo.com%2Fnba')
 
 driver.find_element_by_id('login-username').send_keys(username)	
 driver.find_element_by_id('login-passwd').send_keys(password)
