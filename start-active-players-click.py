@@ -6,6 +6,10 @@ from selenium.webdriver.common.action_chains import ActionChains
 from sys import argv
 import click
 
+#script, daysstr, username, password = argv
+
+#daysint = int(days)
+
 @click.command()
 @click.option('--days', type=int, prompt='Number of days to set active lineup', help='Number of days to set active lineup')
 @click.option('--username', prompt='Your Yahoo username:', help='Your Yahoo account username')
@@ -13,6 +17,8 @@ import click
 def start_active_players(days, username, password):
 	"""Simple python program that sets your active players for the next number DAYS."""
 	print("Logging in as: " + username)
+
+	#daysint = int(days)
 
 	chrome_options = webdriver.ChromeOptions()
 	driver = webdriver.Chrome(executable_path='/Library/Python/2.7/site-packages/selenium/webdriver/chrome/chromedriver', chrome_options=chrome_options)
@@ -39,6 +45,11 @@ def start_active_players(days, username, password):
 		time.sleep(2)
 
 	driver.quit()
+
+
+
+
+
 
 if __name__ == '__main__':
 	start_active_players()
