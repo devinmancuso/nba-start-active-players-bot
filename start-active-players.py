@@ -1,33 +1,42 @@
+#!/usr/bin/python
+
 import time
 from selenium import webdriver
+from selenium.webdriver import PhantomJS
 from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.chrome.options import Options
 from selenium.webdriver.common.action_chains import ActionChains
+from selenium.webdriver.common.desired_capabilities import DesiredCapabilities
 from sys import argv
 import click
 
 @click.command()
 @click.option('--days', type=int, prompt='Number of days to set active lineup', help='Number of days to set active lineup')
-@click.option('--username', prompt='Your Yahoo username:', help='Your Yahoo account username')
-@click.option('--password', prompt='Your Yahoo passwordname:', help='Your Yahoo account password')
-def start_active_players(days, username, password):
+@click.option('--username', prompt='Your Yahoo username', help='Your Yahoo account username')
+@click.option('--password', prompt='Your Yahoo passwordname', help='Your Yahoo account password')
+@click.option('--headless', type=bool, prompt='Do you want to run in headless mode? [True|False]', help='If True you won\'t see what\'s going on while it\'s running. If false you will see the browser render the steps.')
+def start_active_players(days, username, password, headless):
 	"""Simple python program that sets your active players for the next number DAYS."""
 	print("Logging in as: " + username)
 
-	chrome_options = webdriver.ChromeOptions()
-	driver = webdriver.Chrome(executable_path='/Library/Python/2.7/site-packages/selenium/webdriver/chrome/chromedriver', chrome_options=chrome_options)
-	driver.set_window_size(1920, 1080)
-	driver.maximize_window()
+	if(headless):
+		DesiredCapabilities.PHANTOMJS['phantomjs.page.settings.userAgent'] = 'Mozilla/5.0 (Windows NT 6.1; Win64; x64; rv:16.0) Gecko/20121026 Firefox/16.0'
+		driver = webdriver.PhantomJS(executable_path='/Users/devin.mancuso/node_modules/phantomjs/bin/phantomjs')
+	else:
+		chrome_options = webdriver.ChromeOptions()
+		driver = webdriver.Chrome(executable_path='/Library/Python/2.7/site-packages/selenium/webdriver/chrome/chromedriver', chrome_options=chrome_options)
+		driver.set_window_size(1920, 1080)
+		driver.maximize_window()
 
 	driver.get('https://login.yahoo.com/config/login?.src=spt&.intl=us&.done=http%3A%2F%2Fbasketball.fantasysports.yahoo.com%2Fnba')
 
 	driver.find_element_by_id('login-username').send_keys(username)	
 	driver.find_element_by_id('login-passwd').send_keys(password)
-	time.sleep(3)
+	time.sleep(8)
 	driver.find_element_by_name('signin').click()
 	time.sleep(8)
 	driver.find_element_by_xpath("//a[text() = 'My Team ']").click()
-	time.sleep(4)
+	time.sleep(2)
 
 	for x in range(0, days):
 
