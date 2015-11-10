@@ -13,7 +13,7 @@ import click
 @click.command()
 @click.option('--days', type=int, prompt='Number of days to set active lineup', help='Number of days to set active lineup')
 @click.option('--username', prompt='Your Yahoo username', help='Your Yahoo account username')
-@click.option('--password', prompt='Your Yahoo passwordname', help='Your Yahoo account password')
+@click.option('--password', prompt='Your Yahoo password', help='Your Yahoo account password')
 @click.option('--teamname', prompt='Which team do you want to set active lineup for? Enter teamname', help='Your Fantasy basketball teamname')
 @click.option('--headless', type=bool, prompt='Do you want to run in headless mode? [True|False]', help='If True you won\'t see what\'s going on while it\'s running. If false you will see the browser render the steps.')
 def start_active_players(days, username, password, teamname, headless):
