@@ -13,9 +13,10 @@ import click
 @click.command()
 @click.option('--days', type=int, prompt='Number of days to set active lineup', help='Number of days to set active lineup')
 @click.option('--username', prompt='Your Yahoo username', help='Your Yahoo account username')
-@click.option('--password', prompt='Your Yahoo passwordname', help='Your Yahoo account password')
+@click.option('--password', prompt='Your Yahoo password', help='Your Yahoo account password')
+@click.option('--teamname', prompt='Which team do you want to set active lineup for? Enter teamname', help='Your Fantasy basketball teamname')
 @click.option('--headless', type=bool, prompt='Do you want to run in headless mode? [True|False]', help='If True you won\'t see what\'s going on while it\'s running. If false you will see the browser render the steps.')
-def start_active_players(days, username, password, headless):
+def start_active_players(days, username, password, teamname, headless):
 	"""Simple python program that sets your active players for the next number DAYS."""
 	print("Logging in as: " + username)
 
@@ -35,7 +36,14 @@ def start_active_players(days, username, password, headless):
 	time.sleep(8)
 	driver.find_element_by_name('signin').click()
 	time.sleep(8)
-	driver.find_element_by_xpath("//a[text() = 'My Team ']").click()
+
+	# hover to Fantasy Basketball to display the hidden dropdown menu 
+	teams = driver.find_element_by_xpath("//li[@class = 'Navitem Navitem-main Navitem-fantasy Va-top Fl-start Topstart']")
+	hov = ActionChains(driver).move_to_element(teams)
+	hov.perform()
+	time.sleep(1)
+
+	driver.find_element_by_xpath("//a[text() = '"+ teamname +"']").click()
 	time.sleep(2)
 
 	for x in range(0, days):

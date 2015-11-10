@@ -13,9 +13,10 @@ import click
 
 @click.command()
 @click.option('--days', type=int, prompt='Number of days to set active lineup', help='Number of days to set active lineup')
-@click.option('--username', prompt='Your Yahoo username:', help='Your Yahoo account username')
-@click.option('--password', prompt='Your Yahoo passwordname:', help='Your Yahoo account password')
-def start_active_players(days, username, password):
+@click.option('--username', prompt='Your Yahoo username', help='Your Yahoo account username')
+@click.option('--password', prompt='Your Yahoo password', help='Your Yahoo account password')
+@click.option('--teamname', prompt='Which team do you want to set active lineup for? Enter teamname', help='Your Fantasy basketball teamname')
+def start_active_players(days, username, password, teamname):
 	"""Simple python program that sets your active players for the next number DAYS."""
 	print("Logging in as: " + username)
 
@@ -39,8 +40,15 @@ def start_active_players(days, username, password):
 	driver.implicitly_wait(12) # 12 seconds
 	driver.save_screenshot('screenshot.png')
 
-	driver.find_element_by_xpath("//a[text() = 'My Team ']").click()
-	time.sleep(8)
+
+	# hover to Fantasy Basketball to display the hidden dropdown menu 
+	teams = driver.find_element_by_xpath("//li[@class = 'Navitem Navitem-main Navitem-fantasy Va-top Fl-start Topstart']")
+	hov = ActionChains(driver).move_to_element(teams)
+	hov.perform()
+	time.sleep(1)
+
+	driver.find_element_by_xpath("//a[text() = '"+ teamname +"']").click()
+	time.sleep(2)
 
 	for x in range(0, days):
 
